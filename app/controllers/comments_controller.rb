@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def create
     @place = Place.find(params[:place_id])
-    @comment = @place.comments.new(params.require(:comment).permit(:body, :place_id))
+    @comment = @place.comments.new(params.require(:comment).permit(:body))
     @comment.place_id = @place.id
 
     if @comment.save
@@ -10,4 +10,5 @@ class CommentsController < ApplicationController
       render 'new'
     end
   end
+
 end

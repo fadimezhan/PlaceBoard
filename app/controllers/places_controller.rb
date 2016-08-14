@@ -5,12 +5,12 @@ class PlacesController < ApplicationController
   end
 
   def new
-    @place = Place.build
+    @place = Place.new
     load_categories
   end
 
   def create
-    @place = Place.(places_params)
+    @place = Place.new(places_params)
 
     if @place.save
       redirect_to @place
