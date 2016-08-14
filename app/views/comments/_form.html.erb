@@ -1,0 +1,5 @@
+<%= form_for [@place, @place.comments.build] do |f| %>
+
+    <%= f.text_area :body, placeholder:'comment' %><br>
+    <%= f.button :submit %>
+<% end %>

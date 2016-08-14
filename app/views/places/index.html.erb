@@ -1,0 +1,8 @@
+<% @places.each do |place| %>
+    <b>ID </b><%= place.id %>
+    <b>Title </b>
+    <a href="/places/<%= place.id %>"><%= place.name %></a>
+    <b>Description </b><%= place.description %><br>
+<% end %>
+<hr>
+<%= link_to "Categories", categories_path %>

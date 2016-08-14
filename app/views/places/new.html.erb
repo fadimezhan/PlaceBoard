@@ -1,0 +1,9 @@
+<h1>Create new Place</h1>
+<% if @place.errors.any? %>
+    <h1><%=@place.errors.full_messages.join(", ") %></h1>
+
+<%end%>
+<form action="<%= places_path %>" method="post">
+
+  <%= render 'form' %>
+</form>

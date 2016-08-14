@@ -1,0 +1,11 @@
+<h1><%= @category.title%></h1>
+<p><%= @category.description %></p>
+<p><%= @category.color%></p>
+
+<p><b>Listing Ideas From <%= @category.title%></b></p>
+
+<% @category.places.each do |place| %>
+    <p><%=link_to place.name, place_path(place) %></p>
+<% end %>
+
+<%= link_to "Back", categories_path %>

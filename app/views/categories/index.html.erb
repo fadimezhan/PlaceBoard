@@ -1,0 +1,6 @@
+<h1>Listing Categories</h1>
+<% @categories.each do |category|%>
+    <p><%=link_to category.title, category_path(category) %></p>
+<% end %>
+<hr>
+<%= link_to "Places", places_path%>
