@@ -1,6 +1,8 @@
 <h1>Listing Categories</h1>
 <% @categories.each do |category|%>
-    <p><%=link_to category.title, category_path(category) %></p>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%=link_to category.title, category_path(category) %></h3>
+      </div>
+    </div>
 <% end %>
-<hr>
-<%= link_to "Places", places_path%>

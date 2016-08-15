@@ -1,11 +1,14 @@
 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 <%= form_for @place do |f| %>
-    <%= f.label :name %>
+    Name:
     <%= f.text_field :name, placeholder:'name' %><br>
+    Address:
     <%= f.text_field :address, placeholder:'address' %><br>
+    City:
     <%= f.text_field :city, placeholder:'city' %><br>
+    Description:
     <%= f.text_field :description, placeholder:'description' %><br>
-
-    <%= f.select :category_id, @categories%>
+    Category:
+    <%= f.select :category_id, @categories%><br><br>
     <%= f.button :submit %>
 <% end %>

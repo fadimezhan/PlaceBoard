@@ -5,9 +5,9 @@
 <b>Description: </b><%= @place.description %><br />
 <b>Category: </b><%= @place.category.title %><br />
 <br/><br/>
-<button><a href="/places">Back to place list</a></button>
-<button><a href="<%= edit_place_path(@place) %>">Edit</a></button>
-<button><%=link_to "Delete", place_path(@place), method: :delete, data: {confirm:  "Are you sure?"} %></button>
+<a href="/places">Back to place list</a>
+<a href="<%= edit_place_path(@place) %>">Edit</a>
+<%=link_to "Delete", place_path(@place), method: :delete, data: {confirm:  "Are you sure?"} %>
 <hr>
 <h4>Comments</h4>
 <% @place.comments.each do |comment| %>
