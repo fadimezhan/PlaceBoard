@@ -1,8 +1,8 @@
 <h1>Edit <%= @place.name %></h1>
 <% if @place.errors.any? %>
     <h1><%=@place.errors.full_messages.join(", ") %></h1>
-
 <%end%>
+
 <form action="<%= place_path @place %>" method="post">
   <input type="hidden" name="_method" value="put">
 

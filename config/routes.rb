@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+  devise_for :owners
+  get 'welcome/index'
+
+  devise_for :customers
   resources :categories,only: [:index, :show]
 
-  root 'places#index'
+  authenticated :owner do
+    root 'places#index', as: 'authenticated_root'
+  end
+
+  root 'welcome#index'
 
   resources :places do
     resources :comments, only: [:create]

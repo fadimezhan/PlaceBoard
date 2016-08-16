@@ -23,12 +23,20 @@
           <li><%= link_to "Categories", categories_path%></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "New Place", new_place_path%></li>
+          <% if current_owner.present? %>
+            <li><a href="#">Welcome <%= current_owner.email%></a></li>
+            <li><%= link_to "New Place", new_place_path%></li>
+              <li><%= link_to "Log Out", destroy_owner_session_path, method: :delete%></li>
+          <% else %>
+            <li><%= link_to "Log In", new_owner_session_path%></li>
+            <li><%= link_to "Register", new_owner_registration_path%></li>
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
   <nav class="content">
+    <%= render 'layouts/flash' %>
     <%= yield %>
   </nav>
   </body>
