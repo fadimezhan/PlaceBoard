@@ -5,6 +5,30 @@
 <b>Description: </b><%= @place.description %><br />
 <b>Category: </b><%= @place.category.title %><br />
 <br/><br/>
+
+<% if current_customer.present? %>
+    <button type="button" data-toggle="modal" data-target="#myModal">
+      New Reservation
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Rezervation</h4>
+          </div>
+          <div class="modal-body">
+            <%= render 'reservations/form' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% if current_owner == @place.owner %>
+
+    <% end %>
+<% end %>
 <a href="/places">Back to place list</a>
 <% if current_owner.present? %>
   <% if current_owner.id == @place.owner_id %>
@@ -12,16 +36,39 @@
     <%=link_to "Delete", place_path(@place), method: :delete, data: {confirm:  "Are you sure?"} %>
   <% end %>
 <% end %>
-<% if current_customer.present? %>
-    <%= link_to "New Reservation", place_reservations_path(@place) %>
-    <%= render 'reservations/form' %>
-<% end %>
+  <% @place.reservations.each do |reservation| %>
+    <% if reservation.present? %>
+        <br><br>
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            <h3 class="panel-title">Your Reservation</h3>
+          </div>
+          <div class="panel-body">
+            <p>Date : <%= reservation.date%></p>
+            <p>Number of people : <%= reservation.number_of_people%></p>
+            <hr>
 
-<hr>
-<h4>Comments</h4>
-<% @place.comments.each do |comment| %>
-  <p><%= comment.body%></p>
-  <small><%= link_to "Delete", place_comment_path(@place, comment) ,method: :delete%></small>
-<% end %>
-<p><i><b>Write a comment:</b></i></p>
-<%= render 'comments/form'%>
+          </div>
+        </div>
+    <% end %>
+      <hr>
+  <% end %>
+
+<br><br><br>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Comments</h2>
+  </div>
+  <div class="panel-body">
+    <% @place.comments.each do |comment| %>
+        <p><i><small><%= link_to comment.customer.email,"#" %> says ;</small></i></p>
+        <p><%= comment.body%></p>
+        <small><%= link_to "Delete", place_comment_path(@place, comment) ,method: :delete%></small>
+        <hr>
+    <% end %>
+    <% if current_customer.present? %>
+        <p><i><b>Write a comment:</b></i></p>
+        <%= render 'comments/form'%>
+    <% end %>
+  </div>
+</div>

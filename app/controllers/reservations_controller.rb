@@ -3,12 +3,21 @@ class ReservationsController < ApplicationController
     @place = Place.find(params[:place_id])
     @reservation = @place.reservations.new(reservation_params)
     @reservation.customer = current_customer
+    @reservation.place = @place
 
     if @reservation.save
       redirect_to @place
     else
-      render 'new'
+      redirect_to @place, notice: " Not Valid!"
     end
+  end
+
+  def destroy
+    @place = Place.find(params[:place_id])
+    @reservation = @place.reservations.params[:id]
+
+    @reservation.destroy
+    redirect_to @place
   end
 
   private
