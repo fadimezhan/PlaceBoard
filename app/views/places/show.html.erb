@@ -21,6 +21,7 @@
 <h4>Comments</h4>
 <% @place.comments.each do |comment| %>
   <p><%= comment.body%></p>
+  <small><%= link_to "Delete", place_comment_path(@place, comment) ,method: :delete%></small>
 <% end %>
 <p><i><b>Write a comment:</b></i></p>
 <%= render 'comments/form'%>

@@ -11,4 +11,10 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @place = Place.find(params[:place_id])
+    @comment =  Comment.find(params[:id])
+    @comment.destroy
+    redirect_to @place
+  end
 end
