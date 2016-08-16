@@ -1,0 +1,7 @@
+<%= form_for [@place, @reservation] do |f| %>
+    Date:
+    <%= f.text_field :date %><br>
+    Number Of People:
+    <%= f.text_field :number_of_people %><br>
+    <%= f.button :submit %>
+<% end %>

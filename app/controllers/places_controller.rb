@@ -13,7 +13,7 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(places_params)
+    @place = current_owner.places.build(places_params)
 
     if @place.save
       flash[:success]="Successfully created!"
@@ -27,6 +27,7 @@ class PlacesController < ApplicationController
   def show
     @place= Place.find(params[:id])
     @comment = Comment.new
+    @reservation = @place.reservations.build
   end
 
   def edit

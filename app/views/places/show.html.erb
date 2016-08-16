@@ -12,6 +12,11 @@
     <%=link_to "Delete", place_path(@place), method: :delete, data: {confirm:  "Are you sure?"} %>
   <% end %>
 <% end %>
+<% if current_customer.present? %>
+    <%= link_to "New Reservation", place_reservations_path(@place) %>
+    <%= render 'reservations/form' %>
+<% end %>
+
 <hr>
 <h4>Comments</h4>
 <% @place.comments.each do |comment| %>
