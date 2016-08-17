@@ -36,8 +36,7 @@
     <%=link_to "Delete", place_path(@place), method: :delete, data: {confirm:  "Are you sure?"} %>
   <% end %>
 <% end %>
-  <% @place.reservations.each do |reservation| %>
-    <% if reservation.present? %>
+  <% @place.reservations.reject{ |reservation| reservation.id.nil? }.each do |reservation| %>
         <br><br>
         <div class="panel panel-warning">
           <div class="panel-heading">
@@ -47,9 +46,9 @@
             <p>Date : <%= reservation.date%></p>
             <p>Number of people : <%= reservation.number_of_people%></p>
             <hr>
-          </div>
+            <%= link_to "Delete", place_reservation_path( @place,reservation), method: :delete %>
+                </div>
         </div>
-    <% end %>
       <hr>
   <% end %>
 
@@ -62,7 +61,9 @@
     <% @place.comments.each do |comment| %>
         <p><i><small><%= link_to comment.customer.email,"#" %> says ;</small></i></p>
         <p><%= comment.body%></p>
+        <% if current_customer == comment.customer %>
         <small><%= link_to "Delete", place_comment_path(@place, comment) ,method: :delete%></small>
+        <% end %>
         <hr>
     <% end %>
     <% if current_customer.present? %>

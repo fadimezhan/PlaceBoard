@@ -26,7 +26,6 @@ class PlacesController < ApplicationController
 
   def show
     @place= Place.find(params[:id])
-    @reservation = @place.reservations.build
   end
 
   def edit
@@ -49,6 +48,7 @@ class PlacesController < ApplicationController
   end
 
   private
+  # giriş yapanın edit yetkisi olup olmadığını kontrol eder.
   def authorize_owner!
     redirect_to root_path, notice: "Not Authorized" unless @place.owner_id == current_owner.id
   end

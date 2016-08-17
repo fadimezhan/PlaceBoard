@@ -3,7 +3,6 @@ class ReservationsController < ApplicationController
     @place = Place.find(params[:place_id])
     @reservation = @place.reservations.new(reservation_params)
     @reservation.customer = current_customer
-    @reservation.place = @place
 
     if @reservation.save
       redirect_to @place
@@ -14,8 +13,7 @@ class ReservationsController < ApplicationController
 
   def destroy
     @place = Place.find(params[:place_id])
-    @reservation = @place.reservations.params[:id]
-
+    @reservation = Reservation.find(params[:id])
     @reservation.destroy
     redirect_to @place
   end
