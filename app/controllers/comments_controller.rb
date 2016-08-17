@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
     @comment.place_id = @place.id
 
     if @comment.save
+      CommentMailer.new_comment(@place).deliver_now
       redirect_to place_path(@place)
     else
       render 'new'
